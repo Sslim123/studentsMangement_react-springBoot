@@ -1,52 +1,49 @@
-import React, { Component } from "react";
-import StudentsServices from "../server/StudentsServices";
+import React, { useEffect, useState } from "react";
+//import StudentsServices from "../server/StudentsServices";
 import { Link } from "react-router-dom";
-//import { Container } from "react-bootstrap/Container";
-class ListStudents extends Component {
-  constructor(props) {
-    super(props);
+function ListStudents() {
+  const [students, setStudents] = useState([]);
+  //const [data, setData] = useState("");
+  useEffect(() => {
+    fetch("http://localhost:8080/api/v1/student")
+      .then((response) => {
+        return response.json();
+      })
+      .then((students) => {
+        console.log(students);
+        return setStudents(students);
+      });
+  });
 
-    this.state = {
-      students: [],
-    };
-  
-  }
-  componentDidMount() {
-    StudentsServices.getStudents().then((res) => {
-      this.setState({ students: res.data });
-    });
-  }
-  render() {
-    return (
-      <div className="container">
-        <Link to='/register student'>Register Student</Link>
-        <div className="row">
-          <h2 style={{ textAlign: "center" }}>List of Students</h2>
-          <table className="table table-striped table-bordered">
-            <thead>
-              <tr>
-                <th>id </th>
-                <th> First Name </th>
-                <th> Last Name </th>
-                <th> Age </th>
-                <th> EmailAddress </th>
+  return (
+    <div className="container">
+      <Link to="/">Register Student</Link>
+      <div className="row">
+        <h2 style={{ textAlign: "center" }}>List of Students</h2>
+        <table className="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>id </th>
+              <th> First Name </th>
+              <th> Last Name </th>
+              <th> Age </th>
+              <th> EmailAddress </th>
+            </tr>
+          </thead>
+          <tbody>
+            {students.map((student, age) => (
+              <tr key={student.age}>
+                <td>{student.id}</td>
+                <td>{student.firstName}</td>
+                <td>{student.lastName}</td>
+                <td>{student.age}</td>
+                <td>{student.email}</td>
               </tr>
-            </thead>
-            <tbody>
-              {this.state.students.map((student) => 
-                <tr key={student.id}>
-                  <td>{student.id}</td>
-                  <td>{student.firstName}</td>
-                  <td>{student.lastName}</td>
-                  <td>{student.age}</td>
-                  <td>{student.email}</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
-    );
-  }
+    </div>
+  );
 }
 export default ListStudents;

@@ -1,20 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 export default function Footer() {
-  
-    return (
-      <Card className="text-center">
-        <Card.Header>Featured</Card.Header>
-        <Card.Body>
-          <Card.Title>Special title treatment</Card.Title>
-          <Card.Text>
-            With supporting text below as a natural lead-in to additional content.
-          </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
-        </Card.Body>
-        <Card.Footer className="text-muted">2 days ago</Card.Footer>
-      </Card>
-    );
-  }
+  const [date, setDates] = useState(new Date());
+  const handleButton = () => {
+    <Link to="ListStudents">go up</Link>;
+  };
+  //const handleDate = () => {
+  useEffect(() => {
+    setInterval(() => setDates(new Date()), 1000);
+  }, []);
+  //}
+  return (
+    <Card className="text-center">
+      <Card.Body>
+        <Card.Title>Students Register App</Card.Title>
+        <Card.Text>
+          {`${"Date is "} - ${date.getDate()} / ${
+            date.getMonth() + 1
+          } / ${date.getFullYear()}`}
+        </Card.Text>
+        <Button onClick={handleButton} variant="primary">
+          Go up
+        </Button>
+      </Card.Body>
+      <Card.Footer className="text-muted">{`${"Time is "}- ${date.getHours()} / ${date.getMinutes()} / ${date.getSeconds()}`}</Card.Footer>
+    </Card>
+  );
+}

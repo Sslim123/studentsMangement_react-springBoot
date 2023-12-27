@@ -1,24 +1,18 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import ListStudents from "./components/ListStudents";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./components/Home";
-//import { Register } from './components/Register';
+import ListStudents from "./components/ListStudents";
 
 function App() {
   return (
-    <div className="App">
-      <>
-         <Routes>
-          <Route path="/" exact element={<Home/>} />
-          <Route path="/listStudents" exact element={<ListStudents/>}/>
-          <Route path="/register student" element={<Home/>}/>
-          <Route path="/studentDetails" element={<ListStudents/>}/>
-        </Routes> 
-        
-
-      </>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/listStudents" element={<ListStudents />} />
+        <Route path="/listOfStudents" element={<ListStudents />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 export default App;

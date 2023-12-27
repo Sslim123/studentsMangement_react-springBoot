@@ -1,19 +1,22 @@
-import React from 'react'
-import Navbar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container';
-//import ListStudents from './ListStudents';
-import { Link } from 'react-router-dom';
-
+import React from "react";
+import { Link } from "react-router-dom";
 export default function Header() {
-
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
-      <Container>
-        <Navbar.Brand href="#">Register Students App</Navbar.Brand>
-      </Container>
-      <Link to="/listStudents" >ListStudents</Link>
-
-    </Navbar>
+    <div className="container">
+      <div className="row">
+        <div
+          className="nav"
+          style={{
+            textAlign: "center",
+            background: "black",
+            color: "white",
+            fontStyle: "Arial",
+          }}
+        >
+          <h2>Students Manger App</h2>
+          <Link to="listStudents">ListStudents</Link>
+        </div>
+      </div>
+    </div>
   );
 }
-
